@@ -1,5 +1,5 @@
-/* This file manager will only work if the executable is directly in the same directory as the filename. */
-/* An update should be done later. */
+/* This file manager will only work if the specified filename is directly in the same directory as the CLI directory. */
+/* An update should be done later to resolve this. */
 
 #include <stdio.h>
 #include <stdlib.h>
