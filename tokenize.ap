@@ -1,0 +1,3 @@
+library test() [
+    print("Use aspect.exe -f tokenize.ap to tokenize this file.")
+]
