@@ -1,3 +1,7 @@
+#if __INTELLISENSE__
+#pragma diag_suppress 144
+#endif
+
 #include <apcore__filemanager.h>
 #include <Parser.h>
 #include <Executor.h>
@@ -15,6 +19,7 @@ void AE_execute_by_filename(char* filename) {
 
     } else {
         printf("---> Aspect Executor Failed");
+        exit(EXIT_FAILURE);
     }
 
 }

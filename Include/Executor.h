@@ -4,7 +4,6 @@
 #ifndef AP_EXECUTOR_H
 #define AP_EXECUTOR_H
 
-// void AE_execute_line(char* line); /* This executes a specific line of Aspect code. */
 void AE_execute_by_filename(char* filename); /* This executes Aspect code using a filename. */
 
 #endif // AP_EXECUTOR_H
