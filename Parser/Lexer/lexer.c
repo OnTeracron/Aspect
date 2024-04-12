@@ -9,7 +9,7 @@
               The "parser_skip_whitespace" function from the "Parser.h" file is able to handle this for you.
 */
 
-#include <CharLexer.h>
+#include <lexer.h>
 #include <Keywords.h>
 #include <stdlib.h>
 #include <stdio.h> /* For debugging, remove in main code. */
