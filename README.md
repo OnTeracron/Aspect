@@ -1,7 +1,7 @@
 ![Image](https://i.imgur.com/OiTLPa5.png)
 # Aspect Programming Language
 
-![Version](https://img.shields.io/badge/version-0.1.0-pink)
+![Version](https://img.shields.io/badge/version-0.2.0-pink)
 
 Welcome to Aspect!
 

@@ -3,7 +3,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include <Tokens.h>
+#include <tokens.h>
 #include <cJSON.h>
 
 /* Parser API | Helper Functions */
