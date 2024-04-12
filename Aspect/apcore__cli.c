@@ -1,8 +1,8 @@
 /* This is Aspect's CLI handler. */
 
-#include <apcore__cli.h>
-#include <apcore__filemanager.h>
-#include <Executor.h>
+#include <cli.h>
+#include <filemanager.h>
+#include <initializer.h>
 #include <string.h>
 #include <stdio.h>
 

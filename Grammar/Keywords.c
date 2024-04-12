@@ -1,7 +1,12 @@
-#include <Keywords.h>
-#include <Tokens.h>
+#include <keywords.h>
+#include <tokens.h>
 
-/* Attach keyword definitions to reserved_keywords in "Keywords.h". */
+/*
+    Aspect's Language Keywords
+        --> These are the usable keywords that are recognized by the Aspect Interpreter, and are valid tokens.
+        --> Any keywords should be assigned with grace, as the parser may not know how to handle the tokens that are placed in this file, without definition.
+*/
+
 struct Keyword reserved_keywords[] = {
     {TOKEN_IF, "if"},
     {TOKEN_LIBRARY, "library"},

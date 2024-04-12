@@ -1,12 +1,12 @@
 /* Aspect's Language Parser */
 
-#include "Parser.h"
+#include "parser.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <Tokens.h>
-#include <CharLexer.h>
+#include <tokens.h>
+#include <lexer.h>
 #include <cJSON.h>
 
 void parser_next_input_pointer(char** input_ptr, Token* token) {
