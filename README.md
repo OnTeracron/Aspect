@@ -15,7 +15,6 @@
 ## About Aspect
 Aspect is a lightweight programming language designed to streamline the software development process. It has a dynamically typed syntax, with essential language paradigms that are simple to understand.
 
-
 ## Getting Started
 
 Both the documentation and installation procedures for Aspect are currently under development. However, they will be released after functionality is able to be sustained.
