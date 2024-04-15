@@ -1,4 +1,7 @@
-![Image](https://i.imgur.com/OiTLPa5.png)
+<p align="center">
+  <img src="https://i.imgur.com/LAhLqgx.png" />
+</p>
+
 # Aspect Programming Language
 
 ![Version](https://img.shields.io/badge/version-0.2.1-pink)
