@@ -1,57 +1,29 @@
-/* This file manager will only work if the specified filename is directly in the same directory as the CLI directory. */
-/* An update should be done later to resolve this. */
+/* Aspect File Manager */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
-#include <string.h>
+#include <filemanager.h>
+#include <unistd.h>
 
-#define MAX_FILENAME_LEN 256
-#define MAX_FILE_CONTENT_LEN 10000
+static int file_exists(char* filepath) {
+    return access(filepath, F_OK) == 0;
+}
 
-char* AspectFLM_getfilebyname(const char* filename) {
-    FILE* file;
-    char* contents = (char*)malloc(MAX_FILE_CONTENT_LEN * sizeof(char));
+char* AspectFLM_getfilebyname(char* filename) {
+    if (!file_exists(filename)) {
+    fprintf(stderr, "File doesn't exist: %s\n", filename);
+    return 0;
+  }
 
-    if (contents == NULL) {
-        perror("Memory allocation failed.");
-        return NULL;
-    }
+  FILE* file_pointer = fopen(filename, "r");
+  char* buffer = NULL;
+  size_t length;
+  ssize_t bytes_read = getdelim(&buffer, &length, '\0', file_pointer);
+  
+    if (bytes_read == -1) {
+    printf("Failed to read the file: `%s`\n", filename);
+    return 0;
+  }
 
-    struct dirent *entry;
-    DIR *dir = opendir(".");
-    if (dir == NULL) {
-        perror("Unable to open the directory.");
-        free(contents);
-        return NULL;
-    }
-
-    while ((entry = readdir(dir)) != NULL) {
-        if (strcmp(entry->d_name, filename) == 0) {
-            file = fopen(filename, "r");
-            if (file == NULL) {
-                perror("Unable to open the file.");
-                free(contents);
-                closedir(dir);
-                return NULL;
-            }
-
-            char line[MAX_FILE_CONTENT_LEN];
-            contents[0] = '\0';
-
-            while (fgets(line, sizeof(line), file) != NULL) {
-                strcat(contents, line);
-                strcat(contents, " ");
-            }
-
-            fclose(file);
-            closedir(dir);
-            return contents;
-        }
-    }
-
-    fprintf(stderr, "File not found: %s\n", filename);
-    free(contents);
-    closedir(dir);
-    return NULL;
+  fclose(file_pointer);
+  return buffer;
 }
