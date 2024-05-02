@@ -8,7 +8,7 @@
 
 <div align="center">
   <a href="">
-    <img src="https://img.shields.io/badge/version-0.2.1-pink" alt="Version Badge">
+    <img src="https://img.shields.io/badge/version-0.3.1-pink" alt="Version Badge">
   </a>
 </div>
 
