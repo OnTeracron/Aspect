@@ -1,4 +1,4 @@
-Changelog 02.05.2024:
+Changelog 0.3.1:
     Switched the primary operating system support for Linux.
     Removed the temporary build.bat installation file.
     Improved the handling of the file manager and removed dirent.h.
