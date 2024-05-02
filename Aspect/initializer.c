@@ -7,6 +7,7 @@
 #include <Initializer.h>
 #include <stdio.h>
 #include <cJSON.h>
+#include <stdlib.h>
 
 void AE_execute_by_filename(char* filename) {
     char* string_code = AspectFLM_getfilebyname(filename);
