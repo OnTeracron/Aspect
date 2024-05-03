@@ -1,36 +1,35 @@
 /* Aspect's Language Lexer. */
-/* -> This implementation combines tokenization, and lexical analysis into one file. */
+/* -> This implementation combines tokenization and lexical analysis into one file. */
 
 /*
     Notes:
-        ----> The type of the input that is provided into "lexer_get_next_token" should be a char.
-        ----> After a token is fetched, it NEEDS to be consumed in order to progress to the next token. The provided function "lexer_consume_token" is able to do this.
+        ----> The type of the stream that is provided into "lexer_get_next_token" should be a char.
+        ----> After a token is fetched, it NEEDS to be consumed to progress to the next token. The provided function "lexer_consume_token" is able to do this.
 */
 
 #include <lexer.h>
-#include <Keywords.h>
+#include <keywords.h>
 #include <stdlib.h>
 #include <ctype.h>
 
-
-Token* lexer_get_next_token(char* input) {
+Token* lexer_get_next_token(TokenStream stream) {
     Token* token = (Token*)malloc(sizeof(Token));
     token->value = NULL;
 
-    while (*input && isspace(*input)) input++; /* Skip any spaces in front of the input. */
+    lexer_skip_whitespace(*stream);
 
-    if (*input == '\0') { /* If there's no more tokens left, return unknown. */
+    if (*stream == '\0') {
         token->type = TOKEN_UNKNOWN;
         return token;
     }
 
-    if (isalpha(*input)) {
-        input = lex_identifier(input, token);
-    } else if (isdigit(*input)) {
-        lex_constant(input, token);
+    if (isalpha(*stream)) {
+        stream = lex_identifier(stream, token);
+    } else if (isdigit(*stream)) {
+        lex_constant(stream, token);
     } else {
-        AspectTokenType type = lexer_get_single_char_type(*input);
-        token = lex_single_character(input, type);
+        TokenType type = lexer_get_single_char_type(*stream);
+        token = lex_single_character(stream, type);
     }
 
     return token;
@@ -43,72 +42,74 @@ void lexer_consume_token(Token* token) {
     }
 }
 
-AspectTokenType lexer_get_single_char_type(char input) {
-    switch(input) {
-    
-    /* Parenthesis */ 
+TokenType lexer_get_single_char_type(SingleCharacterToken token) {
+    switch(token) {
+        /* Parenthesis */
         case '(': return TOKEN_LEFT_PAREN; break;
         case ')': return TOKEN_RIGHT_PAREN; break;
-    /* Brackets */
+        /* Brackets */
         case '[': return TOKEN_LEFT_BRACKET; break;
         case ']': return TOKEN_RIGHT_BRACKET; break;
-    /* Operators */
+        /* Operators */
         case '+': return TOKEN_PLUS; break;
         case '-': return TOKEN_MINUS; break;
         case '=': return TOKEN_EQUAL; break;
-    /* Separators */
+        /* Separators */
         case ';': return TOKEN_SEMICOLON; break;
         case ',': return TOKEN_COMMA; break;
         case '.': return TOKEN_DOT; break;
-    /* Delimiters */
+        /* Delimiters */
         case '"': return TOKEN_DOUBLE_QUOTE; break;
         case '\'': return TOKEN_SINGLE_QUOTE; break;
-    /* Unknown Token */
+        /* Unknown Token */
         default: return TOKEN_UNEXPECTED; break;
     }
- 
 }
 
-Token* lex_single_character(char* input, AspectTokenType type) {
-    Token* token = (Token*)malloc(sizeof(Token));
-    token->value = (char*)malloc(2);
-    token->value[0] = *input;
+Token* lex_single_character(TokenStream stream, TokenType type) {
+    Token* token = (Token*)malloc(sizeof(Token));
+
+    token->value = (TokenStream)malloc(2);
+
+    token->value[0] = *stream;
     token->value[1] = '\0';
     token->type = type;
 
-    return token;
+    return token;
 }
 
-char* lex_identifier(char* input, Token* token) {
-    char* start = input;
-    while (isalnum(*input)) input++;
-
-    token->value = (char*)malloc(input - start + 1);
-    strncpy(token->value, start, input - start);
-    token->value[input - start] = '\0';
-
-    const int keyword = _keywords_iskeyword(token->value);
-    if (keyword != -1) {
-        token->type = keyword;
-    } else {
-        token->type = TOKEN_IDENTIFIER;
-    }
-
-    return input;
+TokenStream lex_identifier(TokenStream stream, Token* token) {
+    TokenStream start = stream;
+
+    while (isalnum(*stream)) stream++;
+
+    token->value = (TokenStream)malloc(stream - start + 1);
+    strncpy(token->value, start, stream - start);
+    token->value[stream - start] = '\0';
+
+    const int keyword = _keywords_iskeyword(token->value);
+
+    if (keyword != -1) {
+        token->type = keyword;
+    } else {
+        token->type = TOKEN_IDENTIFIER;
+    }
+
+    return stream;
 }
 
-char* lex_constant(char* input, Token* token) {
-    char* start = input;
-    while (isdigit(*input)) input++;
+TokenStream lex_constant(TokenStream stream, Token* token) {
+    TokenStream start = stream;
+    while (isdigit(*stream)) stream++;
 
-    token->value = (char*)malloc(input - start + 1);
-    strncpy(token->value, start, input - start);
-    token->value[input - start] = '\0';
+    token->value = (TokenStream)malloc(stream - start + 1);
+    strncpy(token->value, start, stream - start);
+    token->value[stream - start] = '\0';
     token->type = TOKEN_CONSTANT;
 
-    return input;
+    return stream;
 }
 
-void lexer_skip_whitespace(char** input_ptr) {
-    while (**input_ptr && isspace(**input_ptr)) (*input_ptr)++;
+void lexer_skip_whitespace(TokenStream* stream) {
+    while (**stream && isspace(**stream)) (*stream)++;
 }

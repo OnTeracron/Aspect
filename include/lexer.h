@@ -9,12 +9,15 @@
 
 #include <tokens.h>
 
-Token* lexer_get_next_token(char* input);
+Token* lexer_get_next_token(TokenStream stream);
+Token* lex_single_character(TokenStream stream, TokenType);
+
+TokenStream lex_identifier(TokenStream stream, Token* token);
+TokenStream lex_constant(TokenStream stream, Token* token);
+
+TokenType lexer_get_single_char_type(SingleCharacterToken token);
+
 void lexer_consume_token(Token* token);
-char* lex_identifier(char* input, Token* token);
-char* lex_constant(char* input, Token* token);
-Token* lex_single_character(char* input, AspectTokenType);
-AspectTokenType lexer_get_single_char_type(char input);
-void lexer_skip_whitespace(char** input_ptr);
+void lexer_skip_whitespace(TokenStream stream);
 
 #endif

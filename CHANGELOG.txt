@@ -8,3 +8,5 @@ Changelog 0.3.1:
     Removed the version-specific CMake directory from .gitignore.
     Improved CMakeLists.txt altogether
     Made cli.c a bit less redundant
+    Changed the names of a few variables in "tokens.h".
+    Adjusted the directories to use lowercase naming conventions.
