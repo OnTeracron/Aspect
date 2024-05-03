@@ -3,8 +3,9 @@
 
 /*
     Notes:
-        ----> The type of the stream that is provided into "lexer_get_next_token" should be a char.
-        ----> After a token is fetched, it NEEDS to be consumed to progress to the next token. The provided function "lexer_consume_token" is able to do this.
+        ----> The type of the stream that is provided into "get_next_token" should be a char.
+        ----> After a token is fetched, it needs to be consumed to progress to the next token.
+                The provided function "consume_token" is able to do this.
 */
 
 #include <lexer.h>
@@ -12,11 +13,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-Token* lexer_get_next_token(TokenStream stream) {
+Token* next_token(TokenStream stream) {
     Token* token = (Token*)malloc(sizeof(Token));
     token->value = NULL;
 
-    lexer_skip_whitespace(*stream);
+    skip_whitespace(*stream);
 
     if (*stream == '\0') {
         token->type = TOKEN_UNKNOWN;
@@ -28,21 +29,23 @@ Token* lexer_get_next_token(TokenStream stream) {
     } else if (isdigit(*stream)) {
         lex_constant(stream, token);
     } else {
-        TokenType type = lexer_get_single_char_type(*stream);
+        TokenType type = get_single_char_type(*stream);
         token = lex_single_character(stream, type);
     }
+    
+    skip_whitespace(*stream);
 
     return token;
 }
 
-void lexer_consume_token(Token* token) {
+void consume_token(Token* token) {
     if (token != NULL) {
         free(token->value);
         free(token);
     }
 }
 
-TokenType lexer_get_single_char_type(SingleCharacterToken token) {
+TokenType get_single_char_type(SingleCharacterToken token) {
     switch(token) {
         /* Parenthesis */
         case '(': return TOKEN_LEFT_PAREN; break;
@@ -110,6 +113,6 @@ TokenStream lex_constant(TokenStream stream, Token* token) {
     return stream;
 }
 
-void lexer_skip_whitespace(TokenStream* stream) {
+void skip_whitespace(TokenStream* stream) {
     while (**stream && isspace(**stream)) (*stream)++;
 }

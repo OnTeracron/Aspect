@@ -8,7 +8,7 @@ include_directories(
 )
 
 # Source Files
-file(GLOB_RECURSE SOURCES "Aspect/*.c" "Grammar/*.c" "Include/*.c" "Include/Internal/*.c" "Lib/*.c" "Parser/*.c" "Programs/*.c" "Parser/Lexer/*.c")
+file(GLOB_RECURSE SOURCES "aspect/*.c" "grammar/*.c" "include/*.c" "internal/*.c" "lib/*.c" "parser/*.c" "programs/*.c" "parser/lexer/*.c")
 
 # Disable PDB
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /Z7")

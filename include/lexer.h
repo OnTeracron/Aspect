@@ -9,15 +9,15 @@
 
 #include <tokens.h>
 
-Token* lexer_get_next_token(TokenStream stream);
+Token* next_token(TokenStream stream);
 Token* lex_single_character(TokenStream stream, TokenType);
 
 TokenStream lex_identifier(TokenStream stream, Token* token);
 TokenStream lex_constant(TokenStream stream, Token* token);
 
-TokenType lexer_get_single_char_type(SingleCharacterToken token);
+TokenType get_single_char_type(SingleCharacterToken token);
 
-void lexer_consume_token(Token* token);
-void lexer_skip_whitespace(TokenStream *stream);
+void consume_token(Token* token);
+void skip_whitespace(TokenStream *stream);
 
 #endif

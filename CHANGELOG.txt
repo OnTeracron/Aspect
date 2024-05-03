@@ -1,12 +1,21 @@
 Changelog 0.3.1:
     Switched the primary operating system support for Linux.
     Removed the temporary build.bat installation file.
+    
     Improved the handling of the file manager and removed dirent.h.
-    Made lexer_get_next_token a bit less tedious by abstractifying it.
+    Made next_token a bit less tedious by abstractifying it.
     Added compile_flags.txt to .gitignore for systems that use .clangd.
-    Added Makefile to .gitignore for contributors
+    
+    Added Makefile to .gitignore for contributors.
     Removed the version-specific CMake directory from .gitignore.
-    Improved CMakeLists.txt altogether
-    Made cli.c a bit less redundant
+    Improved CMakeLists.txt altogether.
+    
+    Made cli.c a bit less redundant.
     Changed the names of a few variables in "tokens.h".
     Adjusted the directories to use lowercase naming conventions.
+
+
+    Removed the need to remove the extra whitespace in the parser.
+    Removed unnecessary comments.
+    Updated CMakeLists.txt to adhere to the lowercase versions of directories and files.
+    Changed prefixes to a few functions in the parser.

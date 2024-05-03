@@ -1,4 +1,4 @@
-/* This is Aspect's CLI handler. */
+/* Aspect's CLI handler. */
 
 #include <cli.h>
 #include <initializer.h>
