@@ -18,6 +18,6 @@ TokenStream lex_constant(TokenStream stream, Token* token);
 TokenType lexer_get_single_char_type(SingleCharacterToken token);
 
 void lexer_consume_token(Token* token);
-void lexer_skip_whitespace(TokenStream stream);
+void lexer_skip_whitespace(TokenStream *stream);
 
 #endif
