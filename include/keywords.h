@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-extern int _keywords_iskeyword(char* token);
+extern int iskeyword(TokenStream current_token);
 struct Keyword {
     int token_type;
     const char *keyword;

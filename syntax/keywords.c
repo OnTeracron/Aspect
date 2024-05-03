@@ -14,12 +14,12 @@ struct Keyword reserved_keywords[] = {
     {TOKEN_FUNCTION, "function"}
 };
 
-extern int _keywords_iskeyword(char* checked_keyword) {
+extern int iskeyword(TokenStream current_token) {
     int array_length = sizeof(reserved_keywords) / sizeof(reserved_keywords[0]);
 
     for (int i = 0; i < array_length; i++) {
         const char* keyword_name = reserved_keywords[i].keyword;
-        if (strcmp(keyword_name, checked_keyword) == 0) {
+        if (strcmp(keyword_name, current_token) == 0) {
             return reserved_keywords[i].token_type; /* Return the token type of the keyword. */
         }
     }

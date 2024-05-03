@@ -9,7 +9,7 @@ void AE_execute_by_filename(char* filename) {
     char* string_code = AspectFLM_getfilebyname(filename);
 
     if (string_code != NULL) {
-        cJSON Aspect_AST = parser_build_ast(string_code);
+        cJSON Aspect_AST = build_ast(string_code);
     } else {
         exit(EXIT_FAILURE);
     }

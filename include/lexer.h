@@ -15,9 +15,9 @@ Token* lex_single_character(TokenStream stream, TokenType);
 TokenStream lex_identifier(TokenStream stream, Token* token);
 TokenStream lex_constant(TokenStream stream, Token* token);
 
-TokenType get_single_char_type(SingleCharacterToken token);
+TokenType single_char_type(SingleCharacterToken token);
 
 void consume_token(Token* token);
-void skip_whitespace(TokenStream *stream);
+void skip_whitespace(TokenStream stream);
 
 #endif

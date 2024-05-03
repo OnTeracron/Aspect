@@ -3,12 +3,11 @@ project(aspect)
 
 # Include Directories
 include_directories(
-    Include
-    Include/Internal
+    include
 )
 
 # Source Files
-file(GLOB_RECURSE SOURCES "aspect/*.c" "grammar/*.c" "include/*.c" "internal/*.c" "lib/*.c" "parser/*.c" "programs/*.c" "parser/lexer/*.c")
+file(GLOB_RECURSE SOURCES "syntax/*.c" "internal/*.c" "lib/*.c" "parser/*.c" "programs/*.c" "parser/lexer/*.c" )
 
 # Disable PDB
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /Z7")

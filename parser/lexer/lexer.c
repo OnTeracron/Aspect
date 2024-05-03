@@ -3,7 +3,7 @@
 
 /*
     Notes:
-        ----> The type of the stream that is provided into "get_next_token" should be a char.
+        ----> The type of the stream that is provided into "next_token" should be a char.
         ----> After a token is fetched, it needs to be consumed to progress to the next token.
                 The provided function "consume_token" is able to do this.
 */
@@ -12,12 +12,13 @@
 #include <keywords.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 Token* next_token(TokenStream stream) {
     Token* token = (Token*)malloc(sizeof(Token));
     token->value = NULL;
 
-    skip_whitespace(*stream);
+    skip_whitespace(stream);
 
     if (*stream == '\0') {
         token->type = TOKEN_UNKNOWN;
@@ -27,13 +28,14 @@ Token* next_token(TokenStream stream) {
     if (isalpha(*stream)) {
         stream = lex_identifier(stream, token);
     } else if (isdigit(*stream)) {
-        lex_constant(stream, token);
+        stream = lex_constant(stream, token);
     } else {
-        TokenType type = get_single_char_type(*stream);
+        TokenType type = single_char_type(*stream);
         token = lex_single_character(stream, type);
+        stream++; // Move to the next character
     }
     
-    skip_whitespace(*stream);
+    skip_whitespace(stream);
 
     return token;
 }
@@ -45,7 +47,7 @@ void consume_token(Token* token) {
     }
 }
 
-TokenType get_single_char_type(SingleCharacterToken token) {
+TokenType single_char_type(SingleCharacterToken token) {
     switch(token) {
         /* Parenthesis */
         case '(': return TOKEN_LEFT_PAREN; break;
@@ -87,10 +89,10 @@ TokenStream lex_identifier(TokenStream stream, Token* token) {
     while (isalnum(*stream)) stream++;
 
     token->value = (TokenStream)malloc(stream - start + 1);
-    strncpy(token->value, start, stream - start);
+    memcpy(token->value, start, stream - start);
     token->value[stream - start] = '\0';
 
-    const int keyword = _keywords_iskeyword(token->value);
+    const int keyword = iskeyword(token->value);
 
     if (keyword != -1) {
         token->type = keyword;
@@ -106,13 +108,13 @@ TokenStream lex_constant(TokenStream stream, Token* token) {
     while (isdigit(*stream)) stream++;
 
     token->value = (TokenStream)malloc(stream - start + 1);
-    strncpy(token->value, start, stream - start);
+    memcpy(token->value, start, stream - start);
     token->value[stream - start] = '\0';
     token->type = TOKEN_CONSTANT;
 
     return stream;
 }
 
-void skip_whitespace(TokenStream* stream) {
-    while (**stream && isspace(**stream)) (*stream)++;
+void skip_whitespace(TokenStream stream) {
+    while (*stream && isspace(*stream)) stream++;
 }

@@ -22,17 +22,16 @@ void consume_ast(cJSON* AST) {
 
 cJSON build_ast(TokenStream stream) {
     Token* token;
-    TokenStream *stream = stream;
 
     cJSON* AST = cJSON_CreateObject();
     
-    while ((token = lexer_get_next_token(stream))->type != TOKEN_UNKNOWN) {
+    while ((token = next_token(stream))->type != TOKEN_UNKNOWN) {
 
         printf("Token type: %s, Value: %s\n", _tokens_get_token_by_enum(token->type), token->value);
 
 
         advance_stream(&stream, token);
-        lexer_consume_token(token);
+        consume_token(token);
     }
     return *AST;
     //parser_consume_ast(AST);

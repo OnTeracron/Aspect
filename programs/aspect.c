@@ -1,6 +1,6 @@
 /* Main program -- library is utilized */
 
-#include <Aspect.h>
+#include <aspect.h>
 
 int main(int argc, char *argv[]) {
     AspectCLI_Main(argc, argv);

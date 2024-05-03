@@ -19,16 +19,19 @@ char* AspectCLI_is_flag_set(int argc, char* argv[], const char* flag, int expect
     return "FLAG_NOT_SET";
 }
 
-void AspectCLI_Main(int argc, char* argv[]) {
+void AspectCLI_exiterror(char* error, char* errortype) {
+    printf("%s: %s\n", error, errortype);
+    exit(EXIT_FAILURE);
+}
+
+void AspectCLI_Main(int argc, char** argv) {
 
     char* filename = AspectCLI_is_flag_set(argc, argv, "-f", 1);
 
     if (strcmp(filename, "FLAG_NOT_SET") == 0) { 
-        printf("An *existing* flag must currently be set for this command.");
-        exit(EXIT_FAILURE);
+        AspectCLI_exiterror("MissingFileError", "An existing flag must be set for this command.");
     } else if (strcmp(filename, "ARGUMENT_NOT_GIVEN") == 0) {
-        printf("Filename expected for the -f flag.");
-        exit(EXIT_FAILURE);
+        AspectCLI_exiterror("FlagError", "Filename expected for the -f flag.\nUsage: aspect -f [filename]");
     }
 
     AE_execute_by_filename(filename);
