@@ -10,7 +10,8 @@
 #include <tokens.h>
 
 Token* next_token(TokenStream stream);
-Token* lex_single_character(TokenStream stream, TokenType);
+Token* lex_single_character(TokenStream stream, TokenType type);
+TokenStream lex_string_literal(TokenStream stream, Token* token);
 
 TokenStream lex_identifier(TokenStream stream, Token* token);
 TokenStream lex_constant(TokenStream stream, Token* token);
@@ -18,6 +19,5 @@ TokenStream lex_constant(TokenStream stream, Token* token);
 TokenType single_char_type(SingleCharacterToken token);
 
 void consume_token(Token* token);
-void skip_whitespace(TokenStream stream);
 
 #endif

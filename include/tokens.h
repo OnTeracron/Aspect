@@ -14,7 +14,8 @@
 /* This is expanded by the _TOKENLIST_TOKEN_TYPE_ENUM macro to enumerate Aspect's tokens. */
 #define ENUM_ENTRY(name) name,
 #define _TOKENLIST_TOKEN_TYPE_ENUM \
-    ENUM_ENTRY(TOKEN_IDENTIFIER)     /* <-- Identifier, Constant, Unknown, and Unexpected */ \
+    ENUM_ENTRY(TOKEN_STRING_LITERAL) \
+    ENUM_ENTRY(TOKEN_IDENTIFIER)     /* <-- String Literal, Identifier, Constant, Unknown, and Unexpected */ \
     ENUM_ENTRY(TOKEN_CONSTANT)       \
     ENUM_ENTRY(TOKEN_UNKNOWN)        \
     ENUM_ENTRY(TOKEN_UNEXPECTED)     \
