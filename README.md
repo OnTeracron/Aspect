@@ -35,11 +35,11 @@ sudo make
 
 The Aspect executable will then be installed to your bin directory.
 
-### Compiling a file
+### Compiling a file (in the future)
 
 To compile a file, Aspect allows for using the "-f" flag. This allows for you to input a filename.
 
-You can then, run the following code from the root directory to compile a file to your current path:
+You can then, run the following code from the root directory to compile this file, and place an executable in your current path:
 
 ```
 aspect -f tokenize.ap
