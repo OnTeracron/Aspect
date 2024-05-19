@@ -1,3 +1,5 @@
-library test() [
-    print("Use aspect.exe -f tokenize.ap to tokenize this file.")
-]
+library myLibrary {
+    void test() {
+        Utilities.output("Use aspect.exe -f tokenize.ap to tokenize this file.");
+    }
+}

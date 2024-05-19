@@ -11,9 +11,10 @@ struct Keyword reserved_keywords[] = {
     {TOKEN_IF, "if"},
     {TOKEN_LIBRARY, "library"},
     {TOKEN_IMPORT, "import"},
-    {TOKEN_FUNCTION, "function"}
+    {TOKEN_FUNCTION, "function"},
+    {TOKEN_VOID, "void"}
 };
-
+const char* value = "A" "string" "Is" "This" "Hi";
 extern int iskeyword(TokenStream current_token) {
     int array_length = sizeof(reserved_keywords) / sizeof(reserved_keywords[0]);
 

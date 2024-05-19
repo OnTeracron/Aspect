@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include <stdio.h>
+#include <cli.h>
 
 Token* next_token(TokenStream stream)
 {
@@ -68,6 +68,8 @@ TokenType single_char_type(SingleCharacterToken token)
         /* Brackets */
         case '[': return TOKEN_LEFT_BRACKET;
         case ']': return TOKEN_RIGHT_BRACKET;
+        case '{': return TOKEN_LEFT_CURLY_BRACE;
+        case '}': return TOKEN_RIGHT_CURLY_BRACE;
         /* Operators */
         case '+': return TOKEN_PLUS;
         case '-': return TOKEN_MINUS;
@@ -87,10 +89,10 @@ TokenType single_char_type(SingleCharacterToken token)
 Token *lex_single_character(TokenStream stream, TokenType type)
 {
     Token *token = (Token*)malloc(sizeof(Token));
-    if (!token) exit(1);  // Handle allocation failure
+    if (!token) exit(1);
 
     token->value = (TokenStream)malloc(2);
-    if (!token->value) exit(1);  // Handle allocation failure
+    if (!token->value) exit(1);
 
     token->value[0] = *stream;
     token->value[1] = '\0';
@@ -106,7 +108,7 @@ TokenStream lex_identifier(TokenStream stream, Token *token)
     while (isalnum(*stream)) stream++;
 
     token->value = (TokenStream)malloc(stream - start + 1);
-    if (!token->value) exit(1);  // Handle allocation failure
+    if (!token->value) exit(1);
 
     memcpy(token->value, start, stream - start);
     token->value[stream - start] = '\0';
@@ -115,10 +117,6 @@ TokenStream lex_identifier(TokenStream stream, Token *token)
     if (keyword != -1)
     {
         token->type = keyword;
-    }
-    else if (strcmp(token->value, "library") == 0)
-    {
-        token->type = TOKEN_LIBRARY;
     }
     else
     {
@@ -134,7 +132,7 @@ TokenStream lex_constant(TokenStream stream, Token* token)
     while (isdigit(*stream)) stream++;
 
     token->value = (TokenStream)malloc(stream - start + 1);
-    if (!token->value) exit(1);  // Handle allocation failure
+    if (!token->value) exit(1);
 
     memcpy(token->value, start, stream - start);
     token->value[stream - start] = '\0';
@@ -154,6 +152,7 @@ TokenStream lex_string_literal(TokenStream stream, Token* token)
 
     if (*stream == '\0')
     {
+        AspectCLI_exiterror("Unterminated string literal.", "SyntaxError");
         token->type = TOKEN_UNEXPECTED;
         token->value = strdup("Unterminated string literal");
     }
