@@ -1,5 +1,5 @@
 library myLibrary {
-    void test() {
+    public void test() {
         Utilities.output("Use aspect.exe -f tokenize.ap to tokenize this file.");
     }
 }
