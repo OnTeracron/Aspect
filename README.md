@@ -13,11 +13,40 @@
 </div>
 
 ## About Aspect
-Aspect is a lightweight programming language designed to streamline the software development process. It has a dynamically typed syntax, with essential language paradigms that are simple to understand.
+Aspect is a lightweight programming language designed to streamline the software development process. It has a statically typed syntax,
+making it efficient and reliable for building complex systems while minimizing errors.
 
 ## Getting Started
 
-Both the documentation and installation procedures for Aspect are currently under development. However, they will be released after functionality is able to be sustained.
+A simple way to build Aspect from it's source code is to use CMake.
+
+CMake can be installed from it's official website, https://cmake.org/.
+
+After it is running natively on your system, you will need to navigate to the root directory of the source code.
+
+Then, execute the following commands in a supported terminal:
+
+```
+mkdir build
+cd build
+cmake ../
+sudo make
+```
+
+The Aspect executable will then be installed to your bin directory.
+
+### Compiling a file
+
+To compile a file, Aspect allows for using the "-f" flag. This allows for you to input a filename.
+
+You can then, run the following code from the root directory to compile a file to your current path:
+
+```
+aspect -f tokenize.ap
+```
+
+More support for additional features, such as specifying path locations, and executable names will be added in the future.
+
 
 ## Copyright and Licensing
 Copyright (c) 2024 Teracron. All rights reserved.
