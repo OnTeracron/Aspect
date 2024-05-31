@@ -20,4 +20,4 @@ Changelog 0.3.1:
     Updated CMakeLists.txt to adhere to the lowercase versions of directories and files.
     Changed prefixes to a few functions in the parser.
 
-    Add string literal functionality.
+    Added string literals to the lexer.
