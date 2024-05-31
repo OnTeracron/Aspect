@@ -1,6 +1,5 @@
 /* This is the Aspect Initializer. */
-/* The Aspect Initializer is responsible for building an AST, and initializing interpretation for any provided code. */
-/* This is NOT the Aspect Virtual Machine (AVM). It is responsible for preparation, and initialization only. */
+/* The Aspect Initializer is responsible for building an AST, and initializing compilation. */
 
 /* Notes:
     --> The 'AE_execute_by_filename' function executes Aspect code using a filename given inside of the CLI.
